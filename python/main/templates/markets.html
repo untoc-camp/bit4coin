@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>USDT Markets</title>
+    <link rel="stylesheet" href="../static/market.css">
+</head>
+<body>
+    <header>
+        <h1>USDT Markets</h1>
+        <a href="/" class="goto-main">메인 페이지로</a>
+    </header>
+    <div class="search-container">
+        <input type="text" id="search" class="search-input" placeholder="Search for markets..." onkeyup="filterMarkets()">
+    </div>
+    <div class="market-container" id="marketContainer">
+        {% for market in markets %}
+            <div class="market-item">
+                {{ market }}
+            </div>
+        {% endfor %}
+    </div>
+    <script>
+        function filterMarkets() {
+            const searchInput = document.getElementById('search').value.toLowerCase();
+            const marketItems = document.getElementsByClassName('market-item');
+            
+            for (let i = 0; i < marketItems.length; i++) {
+                const market = marketItems[i].textContent.toLowerCase();
+                if (market.includes(searchInput)) {
+                    marketItems[i].style.display = 'flex';
+                } else {
+                    marketItems[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
