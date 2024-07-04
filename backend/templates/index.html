@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>코인 전략 선택</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+
+</head>
+<body>
+    <header>
+        <h1>Bit4Coin</h1>
+    </header>
+    <div id="container">
+    
+        
+        <div id="etc">
+            <form method="post" action="/strategy">
+                <label for="strategy">전략 선택:</label>
+                <select name="strategy" id="strategy">
+                    <option value="balance">balance</option>
+                    <option value="cur_price">cur_price</option>
+                </select>
+            
+                <label for="coinName">코인 이름:</label>
+                <input type="text" id="coinName" name="coinName" required>
+                <button type="submit">실행</button>
+            </form>
+        </div>
+    
+        <div id="enter">
+        <form method="post" action="/enter_position">
+            <label for="symbol">심볼:</label>
+            <input type="text" id="symbol" name="symbol" required>
+            <br><br>
+            <label for="cur_price">현재가:</label>
+            <input type="text" id="cur_price" name="cur_price" required>
+            <br><br>
+            <label for="amount">수량:</label>
+            <input type="text" id="amount" name="amount" required>
+            <br><br>
+            <label for="target">타겟 (1: long, -1: short):</label>
+            <input type="text" id="target" name="target" required>
+            <button type="submit">포지션 진입</button>
+
+        </form>
+        </div>
+    </div>
+    <hr>
+    {% if result %}
+        <h2>{{ coinName }}</h2>
+        {% if strategy == "balance" %}
+            balance : {{ result }}
+        {% else %}
+            cur_price : {{ result }}
+        {% endif %}
+            postion : {{ target }}
+    {% endif %}
+</body>
+</html>

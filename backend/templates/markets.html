@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>USDT Markets</title>
+    <link rel="stylesheet" href="/static/market.css">
+    <script src="/static/market.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Markets</h1>
+        <a href="/" class="goto-main">메인 페이지</a>
+    </header>
+    <div class="search-container">
+        <input type="text" id="search" class="search-input" placeholder="Search for markets..." onkeyup="filterMarkets()">
+    </div>
+    <div class="market-container" id="market_container">
+        {% for market in markets %}
+            <div class="market-item" onclick="goToMarket('{{market}}')">
+                {{ market }}
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
