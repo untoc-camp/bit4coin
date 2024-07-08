@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>코인 전략 선택</title>
+    <link rel="stylesheet" type="text/css" href="/static/home.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/static/home.js"></script>
+</head>
+<body>
+   <header>
+    Bit4Coin
+    <img src="static/img/setting.png" alt="" id="img_setting">
+   </header>
+   <main>
+    <div id="symbol_graph">
+        <div>
+            <div id="symbol_name">ETH</div>
+            <div id="graph">
+                <img src="static/img/graph.jpg" alt="" id="img_graph">
+            </div>
+        </div>
+        <!-- 전략선택 -->
+        <div class="container">
+            
+            <section id="section_input">
+                <form method="post" action="/home"></form>
+                    <input type="text" id="symbol" name="symbol" placeholder="symbol">
+                    <input type="number" id="perchase_percent" name="perchase_percent" placeholder="percent" min="0" max="1" step="0.01">
+                    <input type="text" id="leverage" name="leverage" placeholder="leverage">
+    
+                    <label for="strategy"></label>
+                    <select name="strategys" id="strategy">
+                        <option value="strategy_1">strategy 1</option>
+                        <option value="strategy_2">strategy 2</option>
+                        <option value="strategy_3">strategy 3</option>
+                    </select>
+                    <div id="btn_enter_position">
+                        <button type="submit" id="enter">ENTER</button> <!--submit 버튼-->
+                    </div>
+                </form>
+            </section>
+            
+            <section id="section_desc">
+                <div id="description"></div>
+            </section>
+    
+        </div>  
+       </div>
+    <!--모달 팝업-->
+    <div class="modal">
+        <div id="detail_popup">
+            <h3>필독!</h3>
+            <p id="modal_des"> </p> <!--모달 디테일-->
+            <div class="modal_btn_container">
+                <button type="button" id="close_detail">No</button>
+                <button type="button" id="enter_position" style="color:black">Yes</button>
+            </div>
+        </div>
+    </div>
+    
+   </main>
+
+<!-- 이미지 -->
+   <footer>
+    <img src="static/img/arrow.png" alt="" onclick="goTo('ETC')">
+    <img src="static/img/symbols.png" alt="" onclick="goTo('symbols')">
+    <img src="static/img/home.png" alt="" onclick="goTo('home')">
+    <img src="static/img/receipt.png" alt="" onclick="goTo('receipt')">
+    <img src="static/img/mypage.png" alt="" onclick="goTo('mypage')">
+   </footer>
+</body>
+
+</html>

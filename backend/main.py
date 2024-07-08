@@ -9,8 +9,6 @@ from strategys.function import get_cur_price, get_balance, dataFrame, calAmount,
 from strategys.env import profit_percent, loss_percent, purchase_percent, con_diffma40_4, timeframe, symbols, k
 from strategys.strategy import strategy_1
 
-import time
-
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -30,11 +28,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-
 templates = Jinja2Templates(directory="templates")
 file_name = "main"
-
 
 
 @app.get("/", response_class=HTMLResponse)
