@@ -43,7 +43,7 @@ main {
     margin-left: 15px;
 }
 
-#section_input input {
+#section_input .input_info {
     width: 130px;
     height: 30px;
     border-radius: 10px;
@@ -73,8 +73,6 @@ main {
     text-align: center;
 }
 
-
-
 #enter:hover {
     box-shadow: 3px 4px 11px 0px #00000040;
 }
@@ -91,6 +89,7 @@ main {
     overflow: hidden;
     background: rgba(0,0,0,0.5);
 }
+
 .modal #detail_popup {
 /*팝업*/
     position: absolute;
@@ -101,7 +100,7 @@ main {
     background: #ffffff;
     border-radius: 20px;
 }
-.modal_btn_container {
+.modal_btn_container form {
     display: flex;
     flex-direction: row;
     justify-content: space-around;

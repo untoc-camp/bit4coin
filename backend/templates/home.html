@@ -3,8 +3,86 @@
 <head>
     <title>코인 전략 선택</title>
     <link rel="stylesheet" type="text/css" href="/static/home.css">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
     <script src="/static/home.js"></script>
+    <script>
+        function goTo(url) {
+    const encoded = encodeURIComponent(url);
+    window.location.href = `/${encoded}`;
+}   
+document.addEventListener("DOMContentLoaded", function() {
+ // 전략선택시 간단하게 설명해주는 desc
+function update_description() {
+    const symbol = document.getElementById('symbol').value;
+
+    const purchase_percent = document.getElementById('purchase_percent').value;
+    const leverage = document.getElementById('leverage').value;
+    const strategy = document.getElementById('strategy').value;
+
+    let strategy_desc = '';
+    if (strategy === 'strategy_1') {
+        strategy_desc = `
+            <p style="font-weight:bold">${symbol}</p>
+            <p>purchase percent : ${purchase_percent*100}%</p>
+            <p>leverage : ${leverage}배</p>
+            <p>profit percent : 0.8%</p>
+            <p>loss percent : 1.6%</p>
+            <p>timeframe : 15m</p>
+            <p>변동성 돌파전략과 SMA를 사용</p>
+        `;
+    } else if (strategy === 'strategy_2') {
+        strategy_desc = `
+            <p style="font-weight:bold">${symbol}</p>
+            <p>purchase percent : ${purchase_percent*100}%</p>
+            <p>leverage : ${leverage}배</p>
+            <p>profit percent : 0.8%</p>
+            <p>loss percent : 1.6%</p>
+            <p>timeframe : 30m</p>
+            <p>변동성 돌파전략과 SMA를 사용</p>
+        `;
+    } else if (strategy === 'strategy_3') {
+        strategy_desc = `
+            <p style="font-weight:bold">${symbol}</p>
+            <p>purchase percent : ${purchase_percent*100}%</p>
+            <p>leverage : ${leverage}배</p>
+            <p>profit percent : 2%</p>
+            <p>loss percent : 4%</p>
+            <p>timeframe : 1d</p>
+            <p>변동성 돌파전략과 SMA를 사용</p>
+        `;
+    }
+
+    // desciption의 내용 : brief
+    document.getElementById('description').innerHTML = strategy_desc;
+
+    // modal의 내용 : detail
+    modal_desc = strategy_desc + "디테일한 내용 추가하기!!"
+    document.getElementById("modal_des").innerHTML = modal_desc;
+}
+
+document.getElementById('strategy').addEventListener('change', update_description);
+
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.querySelector('.modal');
+    const modalOpen = document.querySelector('#enter');
+    const modalClose = document.querySelector('#no_detail');
+    
+    // Open modal when the button is clicked
+    modalOpen.addEventListener('click', function(){
+        // Display modal
+        modal.style.display = 'block';
+    });
+    
+    // Close modal when the close button is clicked
+    modalClose.addEventListener('click', function(){
+       // Hide modal
+        modal.style.display = 'none';
+    });
+});
+
+    </script>
 </head>
 <body>
    <header>
@@ -20,14 +98,14 @@
             </div>
         </div>
         <!-- 전략선택 -->
-        <div class="container">
-            
-            <section id="section_input">
-                <form method="post" action="/home"></form>
-                    <input type="text" id="symbol" name="symbol" placeholder="symbol">
-                    <input type="number" id="perchase_percent" name="perchase_percent" placeholder="percent" min="0" max="1" step="0.01">
-                    <input type="text" id="leverage" name="leverage" placeholder="leverage">
-    
+        <form method="post" action="/enter_position">
+            <div class="container">
+                
+                <section id="section_input">
+                    <input type="text" class="input_info" id="symbol" name="symbol" placeholder="symbol">
+                    <input type="number" class="input_info" id="purchase_percent" name="purchase_percent" placeholder="percent" min="0" max="1" step="0.01">
+                    <input type="text" class="input_info" id="leverage" name="leverage" placeholder="leverage">
+
                     <label for="strategy"></label>
                     <select name="strategys" id="strategy">
                         <option value="strategy_1">strategy 1</option>
@@ -35,37 +113,37 @@
                         <option value="strategy_3">strategy 3</option>
                     </select>
                     <div id="btn_enter_position">
-                        <button type="submit" id="enter">ENTER</button> <!--submit 버튼-->
+                        <input type="button" id="enter" value="ENTER">
                     </div>
-                </form>
-            </section>
+                </section>
+                <div class="modal">
+                    <div id="detail_popup">
+                        <h3>필독!</h3>
+                        <p id="modal_des"> </p> <!--모달 디테일-->
+                        <div class="modal_btn_container">
+                            <button type="button" id="close_detail">No</button>
+                            <button type="sumbit" id="enter_position" style="color:black">Yes</button>
+                        </div>
+                    </div>
+                </div>
             
-            <section id="section_desc">
-                <div id="description"></div>
-            </section>
-    
-        </div>  
-       </div>
-    <!--모달 팝업-->
-    <div class="modal">
-        <div id="detail_popup">
-            <h3>필독!</h3>
-            <p id="modal_des"> </p> <!--모달 디테일-->
-            <div class="modal_btn_container">
-                <button type="button" id="close_detail">No</button>
-                <button type="button" id="enter_position" style="color:black">Yes</button>
-            </div>
+                <section id="section_desc">
+                    <div id="description"></div>
+                </section>
+            </div>  
+        </form>
         </div>
-    </div>
+    <!--모달 팝업-->
+
     
    </main>
 
 <!-- 이미지 -->
    <footer>
-    <img src="static/img/arrow.png" alt="" onclick="goTo('ETC')">
-    <img src="static/img/symbols.png" alt="" onclick="goTo('symbols')">
+    <img src="static/img/arrow.png" alt="" onclick="goTo('goto')">
+    <img src="static/img/symbols.png" alt="" onclick="goTo('symbols_info')">
     <img src="static/img/home.png" alt="" onclick="goTo('home')">
-    <img src="static/img/receipt.png" alt="" onclick="goTo('receipt')">
+    <img src="static/img/history.png" alt="" onclick="goTo('history')">
     <img src="static/img/mypage.png" alt="" onclick="goTo('mypage')">
    </footer>
 </body>

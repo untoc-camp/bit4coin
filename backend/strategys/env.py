@@ -9,7 +9,7 @@ loss_percent = 0.016 # 1.6%
 purchase_percent = 0.5 # 50%
 con_diffma40_4 = 7 # 횡보 조건
 timeframe = "15m"
-symbols = ["ETH/USDT"] # 이더리움
+symbols = "ETH/USDT" # 이더리움
 
 k = 0.5 # VB K 값
 ################################
