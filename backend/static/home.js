@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function update_description() {
     const symbol = document.getElementById('symbol').value;
 
-    const purchase_percent = document.getElementById('perchase_percent').value;
+    const purchase_percent = document.getElementById('purchase_percent').value;
     const leverage = document.getElementById('leverage').value;
     const strategy = document.getElementById('strategy').value;
 
@@ -59,7 +59,7 @@ document.getElementById('strategy').addEventListener('change', update_descriptio
 document.addEventListener("DOMContentLoaded", function() {
     const modal = document.querySelector('.modal');
     const modalOpen = document.querySelector('#enter');
-    const modalClose = document.querySelector('#close_detail');
+    const modalClose = document.querySelector('#no_detail');
     
     // Open modal when the button is clicked
     modalOpen.addEventListener('click', function(){

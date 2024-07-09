@@ -7,8 +7,8 @@ from strategys.init import binance
 from strategys.position import enter_position, exit_position
 from strategys.function import get_cur_price, get_balance, dataFrame, calAmount, VolatilityBreakout, get_symbol_info
 from strategys.env import profit_percent, loss_percent, purchase_percent, con_diffma40_4, timeframe, symbols, k
-from strategys.strategy import strategy_1
-
+from strategys.strategy import strategy_1, strategy_2, strategy_3
+import subprocess
 import time
 
 app = FastAPI()
@@ -37,29 +37,34 @@ templates = Jinja2Templates(directory="templates")
 async def init(request: Request):
     return templates.TemplateResponse("home.html", {"request": request})
 
-@app.post("/home", response_class=HTMLResponse)
-async def home(request: Request, symbol : str = Form(...), perchase_percent : str = Form(...), leverage : str = Form(...)):
-    print(symbol)
-    print(perchase_percent)
-    print(leverage)
-    return templates.TemplateResponse("home.html", {"request": request, "symbol":symbol, "perchase_percent":perchase_percent, "leverage":leverage})
+@app.get("/home", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("home.html", {"request": request})
 
+@app.post("/enter_position", response_class=HTMLResponse)
+async def enter_position(request: Request, symbol: str = Form(...), purchase_percent: float = Form(...), leverage: int = Form(...), strategys:str = Form(...)):
+    if strategys == "strategy_1":
+        strategy_1(symbol, purchase_percent, leverage)
+    elif strategys == "strategy_2":
+        strategy_2(symbol, purchase_percent, leverage)
+    elif strategys == "strategy_3":
+        strategy_3(symbol, purchase_percent, leverage)
+        
+    return templates.TemplateResponse("home.html", {"request": request})
 
-@app.get("/ETC")
-def ETC():
-    return {"message":"ETC"}
+@app.get("/goto", response_class=HTMLResponse)
+async def goto(request: Request):
+    return templates.TemplateResponse("goto.html", {"request": request})
 
-@app.get("/symbols")
-def symbols():
-    return {"message":"symbols"}
+@app.get("/symbols_info", response_class=HTMLResponse)
+async def symbols_info(request: Request):
+    return templates.TemplateResponse("symbols_info.html", {"request": request})
 
-@app.get("/receipt")
-def receipt():
-    return {"message":"receipt"}
+@app.get("/history", response_class=HTMLResponse)
+def history(request: Request):
+    return templates.TemplateResponse("history.html", {"request": request})
 
-@app.get("/mypage")
-def mypage():
-    return {"message":"mypage"}
-
-
+@app.get("/mypage", response_class=HTMLResponse)
+def mypage(request: Request):
+    return templates.TemplateResponse("mypage.html", {"request": request})
 
