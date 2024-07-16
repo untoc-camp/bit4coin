@@ -1,0 +1,49 @@
+body {
+    width: 360px;
+    height: 772px;
+}
+header {
+    border-bottom: 3px solid black;
+    text-align: center;
+    font-size: 35px;
+    padding-left: 40px;
+    padding-bottom: 5px;
+}
+#img_setting {
+    float: right;
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+main {
+    height: 605px;
+}
+.container {
+    padding-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px; /* 요소 사이의 간격을 추가할 수 있습니다 */
+    justify-items: center;
+    align-items: center;
+}
+.item {
+    text-align: center;
+    margin-bottom: 100px;
+}
+.item img {
+    width: 100px;
+    height: 100px; 
+}
+footer {
+    display: flex;
+    border-top: 3px solid black;
+    text-align: center;
+    justify-content: space-evenly;
+    padding-top: 5px;
+}
+footer img {
+    width: 40px;
+    height: 40px;
+}

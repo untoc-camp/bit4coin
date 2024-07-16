@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>코인 전략 선택</title>
+    <link rel="stylesheet" type="text/css" href="./static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./static/test.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Bit4Coin</h1>
+    </header>
+    <div id="container">
+        <form method="get" action="/markets">
+            <button type="submit">마켓 보기</button>
+        </form>
+        <form id="balance_form">
+            <button type="submit">Balance</button>
+        </form>
+        <div id="balance"></div>
+
+        <form id="curPrice_form">
+            <input type="text" name="symbol" id="symbol"> <!--name의 값이 form이랑 같아야함-->
+            <button type="submit">Current Price</button>
+
+        </form>
+        <div id="cur_price"></div>
+        <form method="post" action="/strategy">
+            <label for="strategy"> choose your strategy</label>
+            <select name="strategy" id="strategy">
+                <option value="strategy_1">strategy 1</option>
+                <option value="strategy_2">strategy 2</option>
+                <option value="strategy_3">strategy 3</option>
+            </select>
+            <button type="submit">submit</button>
+        </form>
+        <br>
+        <div id="result_strategy"> 
+            your strategy is {{result}}
+        </div>
+
+        <form method="post" action="/enter_position">
+            <label for="symbol"> symbol : </label>   
+                <input type="text" id="symbol" name="symbol" required>
+            <label for="purchase_percent"> purchase_percent : </label>
+                <input type="text" id="purchase_percent" name="purchase_percent" required>
+            <label for="target"> target( 1: long / -1 : short) : </label>
+                <input type="text" id="target" name="target" required>
+            <button type="submit">enter position</button>
+
+        </form>
+        <div id="enter_result"></div> 
+    </div>
+</body>
+</html>
