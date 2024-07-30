@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>코인 전략 선택</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./static/symbols_info.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./static/symbols_info.js"></script>
+    <style>
+  
+    </style>
+</head>
+<body>
+   <header>
+    Bit4Coin
+    <img src="./static/img/setting.png" alt="" id="img_setting" onclick="goTo('setting')">
+   </header>
+   <main>
+    <div class="loading" id="loading">
+        <img src="./static/img/loading.gif" alt="로딩중" id="loading_img">
+    </div>
+    <div class="container" id="content" style="display: none;">
+      <table class="symbol_table">
+        <thead>
+            <tr>
+                <th>Symbols</th>
+                <th>Current Price</th>
+                <th>시가대비</th>
+            </tr>
+        </thead>
+        <tbody id="symbol_prices">
+
+        </tbody>
+      </table>
+    </div>
+   </main>
+   <footer>
+    <img src="./static/img/arrow.png" alt="" onclick="goTo('goto')">
+    <img src="./static/img/symbols1.png" alt="" onclick="goTo('symbols_info')">
+    <img src="./static/img/home.png" alt="" onclick="goTo('home')">
+    <img src="./static/img/history.png" alt="" onclick="goTo('history')">
+    <img src="./static/img/more.png" alt="" onclick="goTo('more')">
+   </footer>
+</body>
+<script>
+
+</script>
+</html>
