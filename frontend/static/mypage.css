@@ -8,6 +8,7 @@ header {
     font-size: 35px;
     padding-left: 40px;
     padding-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 #img_setting {
@@ -19,6 +20,7 @@ header {
 }
 main {
     height: 605px;
+    text-align: center;
 } 
 img {
     width: 50px;

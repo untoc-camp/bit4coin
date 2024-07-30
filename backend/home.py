@@ -6,15 +6,17 @@ from strategys.position import enter_position, exit_position
 from strategys.function import get_cur_price, get_balance, dataFrame, calAmount, VolatilityBreakout
 from strategys.env import profit_percent, loss_percent, purchase_percent, con_diffma40_4, timeframe, symbols, k
 from strategys.strategy import strategy_1, strategy_2, strategy_3
-
-
-from pydantic import BaseModel
-from typing import Dict
-import datetime
-
-
 from domain.history import history_router
 from domain.symbols import symbols_router
+from pydantic import BaseModel
+from typing import Dict
+import os
+import datetime
+
+SECRET_KEY = os.environ.get("SECRET_KEY") 
+ALGORITHM = os.environ.get("ALGORITHM") 
+ACCESS_TOKEN_EXPIRE_MINUTES = os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES") 
+
 app = FastAPI()
 
 

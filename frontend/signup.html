@@ -1,0 +1,146 @@
+<<<<<<< HEAD:frontend/signup.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/signup.css">
+    <script src="/static/signup.js"></script>
+    <title>Sign in</title>
+    <script>
+        async function signup() {
+            const user_name = document.getElementById("user_name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const api_key = document.getElementById("api_key").value;
+            const api_key_secret = document.getElementById("api_key_secret").value;
+
+
+            try {
+                const response = await axios.post("/signup", {
+                    user_name: user_name,
+                    email: email,
+                    password: password,
+                    api_key: api_key,
+                    api_key_secret: api_key_secret
+                });
+                
+                // 응답이 성공적으로 왔을 때
+                alert("회원가입이 완료되었습니다.");
+                console.log(response.data);
+                goTo("")
+            } catch (error) {
+                // 오류가 발생했을 때
+                if (error.response) {
+                    // 서버가 응답했지만 상태 코드가 2xx 범위를 벗어난 경우
+                    alert("회원가입에 실패했습니다: " + error.response.data.detail);
+                    console.error(error.response.data);
+                } else if (error.request) {
+                    // 요청이 만들어졌지만 응답을 받지 못한 경우
+                    alert("서버로부터 응답이 없습니다. 나중에 다시 시도해주세요.");
+                    console.error(error.request);
+                } else {
+                    // 요청을 설정하는 중에 오류가 발생한 경우
+                    alert("요청을 보내는 중 오류가 발생했습니다.");
+                    console.error('Error', error.message);
+                }
+            }
+        }
+    </script>
+</head> 
+<body>
+    <h1>sign in</h1>
+    <div>사용약관 ~~ 및 유의사항</div> 
+    <!-- 모달창 만들기 -->
+    <form onsubmit="event.preventDefault(); signup();">
+        <input type="checkbox" required>확인했습니다.</input>
+        <div class="info">👉id를 입력하세요</div> 
+        <input type="text" placeholder="your id here" id="user_name" required>
+        <div class="info">🔒비밀번호를 입력하세요</div>
+        <input type="password" placeholder="type your password" id="password" required>
+        <!--비밀번호 확인 기능 만들기-->
+        <div class="info">📧이메일을 입력하세요</div>
+        <input type="email" placeholder="type your email" id="email" required>
+        <div class="info">🔑api key를 입력하세요</div>
+        <input type="text" placeholder="api key here" id="api_key" required>
+        <div class="info">🔑api key:secret을 입력하세요</div>
+        <input type="text" placeholder="api key secret" id="api_key_secret" required>
+        <button type="submit" id="submit">가입하기</button>
+    </form>
+    <div id="si" style="margin-top: 20px;"><button onclick="goTo('')">back</button></div>
+</body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/signin.css">
+    <script src="/static/main.js"></script>
+    <title>Sign in</title>
+    <script>
+        async function signup() {
+            const user_name = document.getElementById("user_name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const api_key = document.getElementById("api_key").value;
+            const api_key_secret = document.getElementById("api_key_secret").value;
+
+
+            try {
+                const response = await axios.post("/signup", {
+                    user_name: user_name,
+                    email: email,
+                    password: password,
+                    api_key: api_key,
+                    api_key_secret: api_key_secret
+                });
+                
+                // 응답이 성공적으로 왔을 때
+                alert("회원가입이 완료되었습니다.");
+                console.log(response.data);
+                goTo("more")
+            } catch (error) {
+                // 오류가 발생했을 때
+                if (error.response) {
+                    // 서버가 응답했지만 상태 코드가 2xx 범위를 벗어난 경우
+                    alert("회원가입에 실패했습니다: " + error.response.data.detail);
+                    console.error(error.response.data);
+                } else if (error.request) {
+                    // 요청이 만들어졌지만 응답을 받지 못한 경우
+                    alert("서버로부터 응답이 없습니다. 나중에 다시 시도해주세요.");
+                    console.error(error.request);
+                } else {
+                    // 요청을 설정하는 중에 오류가 발생한 경우
+                    alert("요청을 보내는 중 오류가 발생했습니다.");
+                    console.error('Error', error.message);
+                }
+            }
+        }
+    </script>
+</head> 
+<body>
+    <h1>sign in</h1>
+    <div>사용약관 ~~ 및 유의사항</div> 
+    <!-- 모달창 만들기 -->
+    <form onsubmit="event.preventDefault(); signup();">
+        <input type="checkbox" required>확인했습니다.</input>
+        <div class="info">👉id를 입력하세요</div> 
+        <input type="text" placeholder="your id here" id="user_name" required>
+        <div class="info">🔒비밀번호를 입력하세요</div>
+        <input type="password" placeholder="type your password" id="password" required>
+        <!--비밀번호 확인 기능 만들기-->
+        <div class="info">📧이메일을 입력하세요</div>
+        <input type="email" placeholder="type your email" id="email" required>
+        <div class="info">🔑api key를 입력하세요</div>
+        <input type="text" placeholder="api key here" id="api_key" required>
+        <div class="info">🔑api key:secret을 입력하세요</div>
+        <input type="text" placeholder="api key secret" id="api_key_secret" required>
+        <button type="submit" id="submit">가입하기</button>
+    </form>
+    <div id="si" style="margin-top: 20px;"><button onclick="goTo('')">back</button></div>
+</body>
+>>>>>>> fc0a95bccce5112721044369201d9372fd90a6b2:login/signin.html
+</html>
