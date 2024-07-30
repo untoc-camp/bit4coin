@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>코인 전략 선택</title>
-    <meta charset="UTF-8">
-
+    <title>더보기</title>
     <link rel="stylesheet" type="text/css" href="./static/more.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./static/more.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const token = localStorage.getItem('token');
+          if (token) {
+              //
+          } else {
+              alert('로그인 정보가 없습니다. 로그인 창으로 이동합니다.');
+              window.location.href = '/';
+          }
+      });
+   </script>
 </head>
 <body>
    <header>
@@ -14,18 +23,24 @@
     <img src="./static/img/setting.png" alt="" id="img_setting" onclick="goTo('setting')">
    </header>
    <main>
-    
-
+      <button onclick="goTo('control')">개인정보 관리</button>
+      <hr class="tip"/>
+      <button onclick="goTo()">API 관리</button>
+      <hr class="tip"/>
+      <button onclick="goTo()">사용 메뉴얼</button>
+      <hr class="tip"/>
+      <button onclick="goTo()">이용 약관</button>
+      <hr class="tip"/>
+      <button onclick="goTo()">설정</button>
+      <hr class="tip"/>
    </main>
-
-
 <!-- 이미지 -->
    <footer>
     <img src="./static/img/arrow.png" alt="" onclick="goTo('goto')">
     <img src="./static/img/symbols.png" alt="" onclick="goTo('symbols_info')">
     <img src="./static/img/home.png" alt="" onclick="goTo('home')">
     <img src="./static/img/history.png" alt="" onclick="goTo('history')">
-    <img src="./static/img/more1.png" alt="" onclick="goTo('mypage')">
+    <img src="./static/img/more1.png" alt="" onclick="goTo('more')">
    </footer>
 </body>
 
