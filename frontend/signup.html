@@ -48,23 +48,24 @@
     </script>
 </head> 
 <body>
-    <h1>sign in</h1>
-    <div>사용약관 ~~ 및 유의사항</div> 
-    <!-- 모달창 만들기 -->
-    <form onsubmit="event.preventDefault(); signup();">
-        <input type="checkbox" required>확인했습니다.</input>
-        <div class="info">👉id를 입력하세요</div> 
-        <input type="text" placeholder="your id here" id="user_name" required>
-        <div class="info">🔒비밀번호를 입력하세요</div>
-        <input type="password" placeholder="type your password" id="password" required>
-        <!--비밀번호 확인 기능 만들기-->
-        <div class="info">📧이메일을 입력하세요</div>
-        <input type="email" placeholder="type your email" id="email" required>
-        <div class="info">🔑api key를 입력하세요</div>
-        <input type="text" placeholder="api key here" id="api_key" required>
-        <div class="info">🔑api key:secret을 입력하세요</div>
-        <input type="text" placeholder="api key secret" id="api_key_secret" required>
-        <button type="submit" id="submit">가입하기</button>
-    </form>
-    <div id="si" style="margin-top: 20px;"><button onclick="goTo('login')">back</button></div>
+    <header>sign in</header>
+    <main>
+        <form onsubmit="event.preventDefault(); signup();">
+            <div class="info">👉id를 입력하세요</div> 
+            <input type="text" placeholder="your id here" id="user_name" required>
+            <div class="info">🔒비밀번호를 입력하세요</div>
+            <input type="password" placeholder="type your password" id="password" required>
+    
+            <div class="info">📧이메일을 입력하세요</div>
+            <input type="email" placeholder="type your email" id="email" required>
+            <div class="info">🔑api key를 입력하세요</div>
+            <input type="text" placeholder="api key here" id="api_key" required>
+            <div class="info">🔑api key:secret을 입력하세요</div>
+            <input type="text" placeholder="api key secret" id="api_key_secret" required>
+            <button type="submit" id="submit">가입하기</button>
+        </form>
+        <div id="si" style="margin-top: 20px;"><button onclick="goTo('login')" style="background-color: white; color: black; border: none; font-size: 18px;">back</button></div>
+    </main>
+   <footer></footer>
+
 </body>

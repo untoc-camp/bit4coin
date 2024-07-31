@@ -50,4 +50,4 @@ def get_current_user(db, token: str): #users/me direct
     db_user = db.query(User).filter(User.user_name == user_name).first()#db연동필요
     if db_user is None:
         raise credentials_exception
-    return User(user_name=user_name)
+    return db_user

@@ -42,18 +42,25 @@
     </script>
 </head>
 <body>
-    <h1>Bit4Coin</h1>
-    <form onsubmit="event.preventDefault(); login();">
-        <input type="text" placeholder="username" id="user_name_login" name="user_name_login" required>
-        <input type="password" placeholder="Password" id="password_login" name="password_login" required>
-        <button type="submit" style="background-color: yellow;
-        color: black;
-        border-radius: 30px;
-        padding: 10px 20px;
-        margin-top: 10px;
-        width: calc(100% - 22px);
-        box-sizing: border-box;">로그인</button>
-    </form>
-    <div id="si" style="margin-top: 20px;"><button class="bun" onclick="goTo('signup')">sign in</button></div>
+    <header>
+        Bit4Coin
+    </header>
+    <main>
+        <form onsubmit="event.preventDefault(); login();">
+            <input type="text" placeholder="username" id="user_name_login" name="user_name_login" required>
+            <input type="password" placeholder="Password" id="password_login" name="password_login" required>
+            <button type="submit" style="background-color: black;
+            color: white;
+            border-radius: 30px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            width: calc(100% - 22px);
+            box-sizing: border-box;">로그인</button>
+
+        </form>
+        <div id="si" style="margin-top: 20px;"><button class="bun" onclick="goTo('signup')">sign up</button></div>
+    </main>
+    
+    <footer></footer>
 </body>
 </html>
