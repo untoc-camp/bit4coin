@@ -23,24 +23,6 @@ SECRET_KEY = "newjeans_ippuda_goat"  # 변경하세요
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-@router.get("/signin_page", response_class=HTMLResponse)
-async def read_root():
-    with open("signin.html", "r", encoding="utf-8") as file:
-        html_content = file.read()
-    return HTMLResponse(content=html_content)
-
-@router.get("/more", response_class=HTMLResponse)
-async def read_root():
-    with open("more.html", "r", encoding="utf-8") as file:
-        html_content = file.read()
-    return HTMLResponse(content=html_content)
-
-
-@router.get("/control", response_class=HTMLResponse)
-async def read_root():
-    with open("control.html", "r", encoding="utf-8") as file:
-        html_content = file.read()
-    return HTMLResponse(content=html_content)
 
 @router.post("/signup", response_model=UserResponse)
 def signup(user: UserCreate, db: Session = Depends(get_db)):

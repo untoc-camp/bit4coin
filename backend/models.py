@@ -5,8 +5,6 @@ from database import Base
 from datetime import datetime
 
 # db table에 어떤 형식으로 데이터를 넣을지
-
-
     
 class User(Base):
     __tablename__ = "users"

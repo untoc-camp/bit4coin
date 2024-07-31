@@ -54,8 +54,10 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("modal_des").innerHTML = modal_desc;
 
         // 전략과 코인을 보여주는 내용 : strategy - symbol
-        document.getElementById("strategy-symbol").innerHTML = `${strategy}  ${symbol} 거래중` 
+        ss = `${strategy}  ${symbol} 거래중` 
         document.getElementById("strategy-symbol").style.textAlign = "center"
+        document.getElementById("strategy-symbol").innerHTML = localStorage.getItem('strategy-symbol');
+        localStorage.setItem('strategy-symbol', ss);  
     }
 
     document.getElementById('strategy').addEventListener('change', update_description);
