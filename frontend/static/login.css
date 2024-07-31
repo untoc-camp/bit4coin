@@ -1,18 +1,13 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-sizing: border-box;
-}
 body {
-    border-top: 2px solid #000;
-    border-bottom: 2px solid #000;
+    width: 360px;
+    height: 772px;
+}
+header {
+    border-bottom: 3px solid black;
+    text-align: center;
+    font-size: 35px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
 }
 input {
     border-radius: 30px;
@@ -20,19 +15,48 @@ input {
     margin: 5px 0;
     width: calc(100% - 22px); /* Adjust width to fit padding and border */
     box-sizing: border-box;
+    margin-bottom: 20px;
 }
-form {
+main {
+    height: 605px;
+    width: 100%;
+    text-align: center !important;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 80%;
+    text-align: center;
+} 
+img {
+    width: 50px;
+    height: 50px;
+}
+
+footer {
+    display: flex;
+    border-top: 3px solid black;
+    text-align: center;
+    justify-content: space-evenly;
+    padding-top: 5px;
+}
+footer img {
+    width: 40px;
+    height: 40px;
+}
+form {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
     box-sizing: border-box;
 }
 .bun {
     border: none;
     background-color: white;
     border: none;
-    font-size: inherit;
+    font-size: 18px;
+    border-radius: 3px;
+    color: black;
+    padding: 3px;
 }
 h1 {
     margin: 20px 0;

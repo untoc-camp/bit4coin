@@ -14,7 +14,7 @@
             if (token) {
                 console.log("토큰 확인 완료.");
 
-                fetch(`/users/me?token=${token}`, {
+                fetch(`http://127.0.0.1:8000/user/users/me?token=${token}`, {
                     method: "GET"
                 }).then(response => response.json())
                 .then(data => {
@@ -22,6 +22,10 @@
                         alert("오류: " + data.detail);
                     } else {
                         console.log("사용자 정보:", data);
+                        const userList = document.getElementById('user-list');
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `${data.user_name}`;
+                        userList.appendChild(listItem);
                     }
                 })
                 .catch(error => {
