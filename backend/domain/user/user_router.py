@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from database import SessionLocal, engine
 from domain.user.user_schema import UserCreate, UserResponse, Userlogin, TokenData
 from models import User
-from crud import create_user
+from domain.user.user_crud import create_user
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 from datetime import datetime, timedelta
@@ -14,7 +14,7 @@ import models
 from database import get_db
 
 from models import User
-from user_func import authenticate_user, create_access_token, get_current_user
+from domain.user.user_func import authenticate_user, create_access_token, get_current_user
 router = APIRouter(
     prefix="/user",
 )
