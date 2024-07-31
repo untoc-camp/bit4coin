@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from models import User
-from user_schema import UserCreate
+from domain.user.user_schema import UserCreate
 
 #password 암호화 함수입니다. 사용 시에 정보 관리가 힘들 것 같아 일단 주석 처리했습니다.
 #from passlib.context import CryptContext

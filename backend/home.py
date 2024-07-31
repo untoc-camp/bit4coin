@@ -8,6 +8,7 @@ from strategys.env import profit_percent, loss_percent, purchase_percent, con_di
 from strategys.strategy import strategy_1, strategy_2, strategy_3
 from domain.history import history_router
 from domain.symbols import symbols_router
+from domain.user import user_router
 from pydantic import BaseModel
 from typing import Dict
 import os
@@ -79,3 +80,4 @@ async def stop_position(task_id: str = Query(...)):
 
 app.include_router(history_router.router, tags=["history"])
 app.include_router(symbols_router.router, tags=["symbols"])
+app.include_router(user_router.router, tags=["user"])
