@@ -55,9 +55,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // 전략과 코인을 보여주는 내용 : strategy - symbol
         ss = `${strategy}  ${symbol} 거래중` 
-        document.getElementById("strategy-symbol").style.textAlign = "center"
-        document.getElementById("strategy-symbol").innerHTML = localStorage.getItem('strategy-symbol');
-        localStorage.setItem('strategy-symbol', ss);  
+        localStorage.setItem('strategySymbol', ss);  
+        saved_strategy_symbol = localStorage.getItem('strategySymbol')
+        document.getElementById("strategy-symbol").textContent = saved_strategy_symbol;
     }
 
     document.getElementById('strategy').addEventListener('change', update_description);
@@ -80,9 +80,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // 페이지 로드 시 상태를 로드하여 모달의 상태를 설정
     const modal_in_position_state = localStorage.getItem('modal_in_position_state');
     const savedTaskId = localStorage.getItem('task_id');
-    if (modal_in_position_state === 'block' && savedTaskId) {
+    const saved_strategy_symbol = localStorage.getItem("strategySymbol")
+    if (modal_in_position_state === 'block' && savedTaskId && saved_strategy_symbol) {
         modal_in_position.style.display = 'block';
         end_button.setAttribute('data_task_id', savedTaskId);
+        document.getElementById("strategy-symbol").textContent = saved_strategy_symbol;
     }
 
     // 거래 진입 모달 페이지 띄우기
@@ -127,9 +129,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.error('Error:', error);
             });
         modal.style.display = 'none';
-
+            
         modal_in_position.style.display = 'block';
         localStorage.setItem('modal_in_position_state', 'block'); // 상태 저장
+
     });
 
     // 전략과 코인의 정보를 알려주는 모달페이지를 닫고 백그라운드 실행을 멈춤
@@ -138,6 +141,8 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("task_id is", taskId)
         modal_in_position.style.display = 'none';
         localStorage.setItem('modal_in_position_state', 'none');
+
+        localStorage.removeItem('strategySymbol');
 
 
         // 포지션 나가기
