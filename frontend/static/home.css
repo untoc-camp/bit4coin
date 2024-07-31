@@ -18,6 +18,7 @@ header {
 }
 main {
     height: 605px;
+    position: relative;
 }
 #symbol_name {
     text-align: center;
@@ -69,7 +70,11 @@ main {
     height: 210px;
     font-size: 10px;
     text-align: center;
+    display: flex; 
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }
+
 
 #enter:hover {
     box-shadow: 3px 4px 11px 0px #00000040;
@@ -83,9 +88,10 @@ main {
     top:0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     background: rgba(0,0,0,0.5);
+    z-index: 1000;
 }
 
 .modal_detail #detail_popup {
@@ -97,6 +103,7 @@ main {
     padding: 20px;
     background: #ffffff;
     border-radius: 20px;
+    font-size: 10px;
 }
 .modal_btn_container {
     display: flex;
@@ -124,6 +131,46 @@ main {
     transition: box-shadow 0.2s;
 }
 
+
+/* 포지션 스탑을 위한 모달 페이지 */
+.modal_in_position {
+    display: none; /*평소에는 보이지 않도록*/
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+    
+.modal_in_position #popup_in_position {
+/*팝업*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 20px;
+    font-size: 15px;
+}
+
+#stop_position {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: rgb(204, 255, 0);
+    border: none;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+
+
 footer {
     display: flex;
     border-top: 3px solid black;
@@ -137,33 +184,3 @@ footer img {
     height: 40px;
 }
 
-
-
-
-
-
-
-
-
-.modal_in_position {
-    /*팝업 배경*/
-        display: none; /*평소에는 보이지 않도록*/
-        position: absolute;
-        top:0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        background: rgba(0,0,0,0.5);
-    }
-    
-.modal_in_position #popup_in_position {
-/*팝업*/
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 20px;
-}

@@ -45,11 +45,17 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // desciption의 내용 : brief
-        document.getElementById('description').innerHTML = strategy_desc;
+        descriptions = document.getElementById('description')
+        descriptions.style.display = "block"
+        descriptions.innerHTML = strategy_desc;
 
         // modal의 내용 : detail
         modal_desc = strategy_desc + "디테일한 내용 추가하기!!"
         document.getElementById("modal_des").innerHTML = modal_desc;
+
+        // 전략과 코인을 보여주는 내용 : strategy - symbol
+        document.getElementById("strategy-symbol").innerHTML = `${strategy}  ${symbol} 거래중` 
+        document.getElementById("strategy-symbol").style.textAlign = "center"
     }
 
     document.getElementById('strategy').addEventListener('change', update_description);
@@ -58,11 +64,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    // 디테일 모달
     const modal = document.querySelector('.modal_detail');
     const modalOpen = document.querySelector('#enter');
     const modalClose = document.querySelector('#close_detail');
 
-    // 
+    // 전략과 코인 알려주는 모달
     const modal_in_position = document.querySelector('.modal_in_position'); 
     const yes_button = document.getElementById("enter_position");   
     const end_button = document.getElementById('stop_position');
@@ -87,8 +94,11 @@ document.addEventListener("DOMContentLoaded", function() {
         modal.style.display = 'none';
     });
 
-    // 포지션에 진입한 -> 전략과 코인의 정보를 알려주는 모달페이지
+    // 포지션에 진입한함-> 전략과 코인의 정보를 알려주는 모달페이지
     yes_button.addEventListener('click', function() {
+
+
+
         const form = document.getElementById('enter_position_form');
         const formData = new FormData(form);
         const jsonData = {};
@@ -124,8 +134,8 @@ document.addEventListener("DOMContentLoaded", function() {
     end_button.addEventListener('click', function(){
         var taskId = this.getAttribute("data_task_id");
         console.log("task_id is", taskId)
-        // modal_in_position.style.display = 'none';
-        // localStorage.setItem('modal_in_position_state', 'none');
+        modal_in_position.style.display = 'none';
+        localStorage.setItem('modal_in_position_state', 'none');
 
 
         // 포지션 나가기
@@ -139,9 +149,6 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             console.log(data)
             if (data.message) {
-                console.log(data.message)
-                modal_in_position.style.display = 'none';
-                localStorage.setItem('modal_in_position_state', 'none');
                 localStorage.removeItem('task_id');
                 alert("작업이 성공적으로 중지되었습니다.");
             } else {
