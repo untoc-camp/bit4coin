@@ -101,16 +101,34 @@ document.addEventListener("DOMContentLoaded", function() {
     // 포지션에 진입한함-> 전략과 코인의 정보를 알려주는 모달페이지
     yes_button.addEventListener('click', function() {
 
-
+        // function sendDataToServer() {
+        //     const data = localStorage.getItem('token'); // localStorage에서 데이터 가져오기
+        //     fetch('http://localhost:8000/history/send_token', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({ data: data })
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => console.log('Success:', data))
+        //     .catch(error => console.error('Error:', error));
+        // }
+        // sendDataToServer()
 
         const form = document.getElementById('enter_position_form');
         const formData = new FormData(form);
         const jsonData = {};
+
+
+
         formData.forEach((value, key) => {
                 jsonData[key] = value;
             });
 
         // 포지션 진입
+        const token = localStorage.getItem('token'); // localStorage에서 데이터 가져오기
+        jsonData["token"] = token
         fetch("http://127.0.0.1:8000/enter_position", {
                 method: "POST",
                 headers: {

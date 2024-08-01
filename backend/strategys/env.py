@@ -4,11 +4,11 @@
 # 지정가 : 0.02% * 2
 # 시장가 : 0.04% * 2
 ################
-profit_percent = 0.02# 0.8%
-loss_percent = 0.04 # 1.6%
+profit_percent = 0.008# 0.8%
+loss_percent = 0.016 # 1.6%
 purchase_percent = 0.5 # 50%
-con_diffma40_4 = 10 # 횡보 조건
-timeframe = "1d"
+con_diffma40_4 = 1 # 횡보 조건
+timeframe = "1m"
 symbols = "ETH/USDT" # 이더리움
 
 k = 0.5 # VB K 값

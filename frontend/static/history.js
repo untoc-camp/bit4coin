@@ -16,11 +16,14 @@ function show_content() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    const history_list_apiURL = "http://127.0.0.1:8000/history/list";  // FastAPI 서버 URL
-    const history_first_apiURL = "http://127.0.0.1:8000/history/list_first";  // FastAPI 서버 URL
+    const token = localStorage.getItem('token'); // localStorage에서 데이터 가져오기
+    const history_list_apiURL = `http://127.0.0.1:8000/history/list?token=${token}`;  // FastAPI 서버 URL
+    const history_first_apiURL = `http://127.0.0.1:8000/history/list_first?token=${token}`;  // FastAPI 서버 URL
 
     function fetch_history_list() {
-        fetch(history_list_apiURL)
+        fetch(history_list_apiURL, {
+            method: "GET"
+        }) 
             .then(response => response.json())
             .then(data => {
                 const container = document.querySelector(".container");
@@ -62,7 +65,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function fetch_history_first() {
-        fetch(history_first_apiURL)
+        fetch(history_first_apiURL, {
+            method: "GET"
+        }) 
             .then(response => response.json())
             .then(data => {
                 const container = document.querySelector(".main_top");

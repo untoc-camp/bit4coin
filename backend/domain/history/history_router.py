@@ -1,10 +1,12 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from typing import List
 from database import get_db
 from domain.history import history_schema, history_crud
 from models import Item
-
+from jose import JWTError, jwt
+from pydantic import BaseModel
+from models import User
 from domain.history.history_function import update_item
 router = APIRouter(
     prefix="/history",
@@ -20,8 +22,8 @@ router = APIRouter(
 
 # history의 가장 최근의 item을 보여줌
 @router.get("/list_first", response_model=List[history_schema.Item_schema])
-def history_list_first(db: Session = Depends(get_db)):
-    _history_list_first = history_crud.get_item_list_first(db)
+def history_list_first(token: str = Query(...), db: Session = Depends(get_db)):
+    _history_list_first = history_crud.get_item_list_first(db, token)
 
     # current_price가 필요한 변수들은 DB의 내용을 조금 변화 시켜서 보여줌
     item = _history_list_first[0]
@@ -32,8 +34,8 @@ def history_list_first(db: Session = Depends(get_db)):
 
 # 가장 최근의 item을 제외한 history의 목록을 보여줌
 @router.get("/list", response_model=List[history_schema.Item_schema])
-def history_list(db: Session = Depends(get_db)):
-    _history_list = history_crud.get_item_list(db) # 상단의 item을 제외한 데이터를 불러옴
+def history_list(token: str = Query(...), db: Session = Depends(get_db)):
+    _history_list = history_crud.get_item_list(db, token) # 상단의 item을 제외한 데이터를 불러옴
 
     return _history_list
 
@@ -44,3 +46,7 @@ def create_item(item_schema: history_schema.Item_schema, db: Session = Depends(g
     if _create_item is None:
         raise HTTPException(status_code=400, detail="Failed to create item")
     return _create_item
+
+
+
+

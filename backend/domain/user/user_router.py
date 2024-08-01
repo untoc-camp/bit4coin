@@ -23,7 +23,6 @@ SECRET_KEY = "newjeans_ippuda_goat"  # 변경하세요
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-
 @router.post("/signup", response_model=UserResponse)
 def signup(user: UserCreate, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.email == user.email).first()
@@ -50,6 +49,8 @@ async def login(user : Userlogin, db: Session = Depends(get_db)):
     access_token = create_access_token(
         data={"sub": user.user_name}, expires_delta=access_token_expires
     )
+
+    
     return {"access_token": access_token, "token_type": "bearer"}
 
 # 보호된 경로

@@ -1,18 +1,19 @@
 from domain.history import history_crud, history_schema
 from database import get_db
-from fastapi import Depends
+from fastapi import Depends, Query, HTTPException
 from sqlalchemy.orm import Session
 from strategys.env import profit_percent, loss_percent
 from strategys.function import get_cur_price
+from domain.user.user_router import get_current_user
 
 from models import Item
-
 import datetime
-
 
 # history를 자동매매의 내역을 DB로 옮기는 작업
 # strategys.stratefy.strategy_1, 2 , 3의 포지션에 진입하는 if문 안에 들어갈 예정
-def create_history(symbol, position, entry_price, amount, cur_price):
+    
+
+def create_history(symbol, position, entry_price, amount, cur_price, email):
     db = next(get_db())  # Depends 대신 직접 세션 객체 생성
     if position["type"] == "long":
         profit_end = entry_price + entry_price * profit_percent   
@@ -36,8 +37,9 @@ def create_history(symbol, position, entry_price, amount, cur_price):
         "amount": amount,
         "profit_end": profit_end,
         "loss_end": loss_end,
-        "onwer_id": 0
+        "owner_email": email # db에 들어가는 email : 현재 로그인된 current user의 email을 넣어야됨 
     }
+
     # db에 넣기 위해 우리가 정의한 schema 형식에 맞게 데이터 변환
     item_schema = history_schema.Item_schema(**item_data)
 
@@ -72,7 +74,7 @@ def update_history(cur_price):
             amount=item_data.amount,
             profit_end=item_data.profit_end,
             loss_end=item_data.loss_end,
-            onwer_id=item_data.onwer_id,
+            owner_email=item_data.owner_email,
             enter_time=item_data.enter_time,  
             close_time=close_time # 변동하는 값 : 종료 시간은 포지션이 종료된 시간으로 정의함
         )

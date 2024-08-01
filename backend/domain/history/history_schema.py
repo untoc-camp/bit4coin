@@ -22,7 +22,7 @@ class Item_schema(BaseModel):
     profit_end : float
     loss_end : float
 
-    onwer_id : int
+    owner_email : str
 
 
     class Config:
