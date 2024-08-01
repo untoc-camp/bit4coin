@@ -22,3 +22,12 @@ class Userlogin(BaseModel):
 
 class TokenData(BaseModel):
     token: str
+
+class ChangePassword(BaseModel):
+    token : str
+    user_password_change : str
+
+class ChangeApiKey(BaseModel):
+    token : str
+    api_key_change : str
+    api_key_secret_change : str
