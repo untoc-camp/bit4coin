@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from models import User
-from domain.user.user_schema import UserCreate
+from domain.user.user_schema import UserCreate,ChangePassword,ChangeApiKey
 
 #password 암호화 함수입니다. 사용 시에 정보 관리가 힘들 것 같아 일단 주석 처리했습니다.
 #from passlib.context import CryptContext
@@ -20,3 +20,14 @@ def create_user(db: Session, user: UserCreate):
     db.commit()
     db.refresh(db_user)
     return db_user
+
+def change_user_password(db : Session, c_user,cpwd):
+    
+    db_user = db.query(User).filter(User.user_name == c_user).first()
+    if not db_user:
+        return None
+    else:
+        db_user.password = cpwd
+        db.commit()
+        db.refresh(db_user)
+        return db_user

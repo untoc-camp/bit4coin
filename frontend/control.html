@@ -21,11 +21,11 @@
                     if (data.detail) {
                         alert("오류: " + data.detail);
                     } else {
-                        console.log("사용자 정보:", data);
                         const userList = document.getElementById('user-list');
                         const listItem = document.createElement('li');
-                        listItem.textContent = `${data.user_name}`;
+                        listItem.textContent = `이름:${data.user_name},비밀번호:${data.password}`;
                         userList.appendChild(listItem);
+                        console.log("사용자 정보:", data);
                     }
                 })
                 .catch(error => {
@@ -41,6 +41,38 @@
             test();
         });
 
+    </script>
+    <script>
+        async function changepwd() {
+            const user_name_login = document.getElementById("cpassword").value;
+            const token = localStorage.getItem('token');
+            try {
+                
+                const response = await axios.post("http://127.0.0.1:8000/user/changepwd", {
+                    token : token,
+                    user_password_change : user_name_login
+                });
+                
+                // 응답이 성공적으로 왔을 때
+                console.log("비밀번호 변환성공")
+                console.log(response.data)
+            } catch (error) {
+                // 오류가 발생했을 때
+                if (error.response) {
+                    // 서버가 응답했지만 상태 코드가 2xx 범위를 벗어난 경우
+                    alert("변경에 실패했습니다.: " + error.response.data.detail);
+                    console.error(error.response.data);
+                } else if (error.request) {
+                    // 요청이 만들어졌지만 응답을 받지 못한 경우
+                    alert("서버로부터 응답이 없습니다. 나중에 다시 시도해주세요.");
+                    console.error(error.request);
+                } else {
+                    // 요청을 설정하는 중에 오류가 발생한 경우
+                    alert("요청을 보내는 중 오류가 발생했습니다.");
+                    console.error('Error', error.message);
+                }
+            }
+        }
     </script>
 
     <!-- <script>
@@ -70,9 +102,11 @@
 
 
     <!-- 버튼 누르면 숨겨놨던 Form 창 나오기 -->
-     <button onclick='document.getElementById("change").style.display ="block";'>보이기</button>
-     <Form id="change" style="display: none;">
-      <p>개인정보 변경란</p>
+     <button onclick='document.getElementById("change").style.display ="block";'>개인정보 변경</button>
+
+     <Form id="change" style="display: none;" onsubmit="event.preventDefault(); changepwd();">
+      <p>비밀번호 변경</p>
+      <input placeholder="변경할 비밀번호를 입력하십쇼." id="cpassword" required>
       <button type="submit">제출</button>
      </Form>
     <!-- submit-제출 후 mypage로 복귀 -->
