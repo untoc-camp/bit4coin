@@ -1,20 +1,46 @@
 from models import Item
 from sqlalchemy.orm import Session
 
-
+from jose import jwt
 from domain.history import history_schema
 import datetime
+from models import User
+
+SECRET_KEY = "newjeans_ippuda_goat"  # 변경하세요
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 # 가장 최근에 진입한 포지션의 정보를 불러옴 
-def get_item_list_first(db: Session):
-    item_list_first= db.query(Item).order_by(Item.enter_time.desc()).first()
+def get_item_list_first(db: Session, token):
+    print(f"token : {token}")
+    payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    print(payload)
+    user_name = payload["sub"]
+    print("user name :", user_name)
+    db_user_nickname = db.query(User).filter(User.user_name == user_name).first()
+    email = db_user_nickname.email
+    print("user_email :", email)
+
+    item_list_first= db.query(Item).filter(Item.owner_email == email).order_by(Item.enter_time.desc()).first()
     print(item_list_first)
     return [item_list_first] # 리스트 형태
 
 
 # 가장 최근에 진입한 포지션을 제외한 정보를 불러옴
-def get_item_list(db: Session):
-    item_list = db.query(Item).order_by(Item.enter_time.desc()).offset(1).all()
+def get_item_list(db: Session, token):
+    print(f"token : {token}")
+
+    # 이메일 받아오기 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    print(payload)
+    user_name = payload["sub"]
+    print("user name :", user_name)
+    db_user_nickname = db.query(User).filter(User.user_name == user_name).first()
+    email = db_user_nickname.email
+    print("user_email :", email)
+    item_list = db.query(Item).filter(Item.owner_email == email).order_by(Item.enter_time.desc()).offset(1).all()
+
+
     print(item_list)
     return item_list
 
@@ -34,7 +60,7 @@ def create_item(db: Session, item_schema: history_schema.Item_schema): # item_sc
                      amount=item_schema.amount,
                      profit_end=item_schema.profit_end,
                      loss_end=item_schema.loss_end,
-                     onwer_id=item_schema.onwer_id)
+                     owner_email=item_schema.owner_email)
 
     db.add(Item_data)
     db.commit()

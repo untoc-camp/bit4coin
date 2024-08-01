@@ -42,6 +42,7 @@ def get_current_user(db, token: str): #users/me direct
     )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        print(payload)
         user_name: str = payload.get("sub")
         if user_name is None:
             raise credentials_exception
@@ -51,3 +52,4 @@ def get_current_user(db, token: str): #users/me direct
     if db_user is None:
         raise credentials_exception
     return db_user
+

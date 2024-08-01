@@ -37,13 +37,13 @@ def set_leverage(symbol, leverage=1):
     })
 
 
-def strategy_1(tasks, task_id: str, symbol = symbols, purchase_percent=purchase_percent, leverage = 1):
+def strategy_1(tasks, task_id: str, email, symbol = symbols, purchase_percent=purchase_percent, leverage = 1):
 
     entry_price = 0
     position = {
         "type":None,
         "amount":0
-    }
+    }   
     
     set_leverage(symbol, leverage)
     while task_id in tasks:
@@ -69,9 +69,9 @@ def strategy_1(tasks, task_id: str, symbol = symbols, purchase_percent=purchase_
         diffma40_4 = df["diffMa40_4"].iloc[-1]
 
         # long position 진입 조건
-        is_long = ((sma4 > sma30) & (cur_price > long_target) & (diffma40_4 > con_diffma40_4) & (position["type"] == None)) 
+        is_long = ((sma4 > sma30) & (cur_price > long_target-5) & (diffma40_4 > con_diffma40_4) & (position["type"] == None)) 
         # short position 진입 조건
-        is_short = ((sma4 < sma30) & (cur_price < short_target) & (diffma40_4 > con_diffma40_4) & (position["type"] == None)) 
+        is_short = ((sma4 < sma30) & (cur_price < short_target+5) & (diffma40_4 > con_diffma40_4) & (position["type"] == None)) 
 
         # long position 청산 조건
         is_long_end =  (((entry_price + entry_price * profit_percent < cur_price) and position["type"] == "long") or ((entry_price - entry_price * loss_percent > cur_price) and position["type"] == "long") )
@@ -81,26 +81,30 @@ def strategy_1(tasks, task_id: str, symbol = symbols, purchase_percent=purchase_
         # position 진입
         if is_long:
             entry_price = cur_price
-            create_history(symbol, position, entry_price, amount, cur_price)
+
             print_info(df, long_target, short_target, cur_price, diffma40_4, position, entry_price)
             enter_position(binance, symbol=symbol, cur_price = cur_price, amount=amount, target=1, position=position)
+            create_history(symbol, position, entry_price, amount, cur_price, email)
         
         if is_long_end:
-            update_history(cur_price)
+   
             print_info(df, long_target, short_target, cur_price, diffma40_4, position, entry_price)
             exit_position(binance, symbol=symbol, cur_price=cur_price, amount = position["amount"], position=position)
+            update_history(cur_price)
             
             
         if is_short:
             entry_price = cur_price
-            create_history(symbol, position, entry_price, amount, cur_price)
+
             print_info(df, long_target, short_target, cur_price, diffma40_4, position, entry_price)
             enter_position(binance, symbol=symbol, cur_price = cur_price, amount=amount, target=-1, position=position)
+            create_history(symbol, position, entry_price, amount, cur_price, email)
 
         if is_short_end:
-            update_history(cur_price)
+            
             print_info(df, long_target, short_target, cur_price, diffma40_4, position, entry_price)
             exit_position(binance, symbol=symbol, cur_price=cur_price, amount = position["amount"], position=position)
+            update_history(cur_price)
             
         else:
             print_info(df, long_target, short_target, cur_price, diffma40_4, position, entry_price)

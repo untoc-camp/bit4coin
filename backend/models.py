@@ -3,6 +3,9 @@ from sqlalchemy.orm import relationship
 from database import Base
 
 from datetime import datetime
+# alembic revision --autogenerate
+# alembic upgrade head
+
 
 # db table에 어떤 형식으로 데이터를 넣을지
     
@@ -16,6 +19,7 @@ class User(Base):
     create_date = Column(DateTime, default=datetime.utcnow)
     api_key = Column(Text, nullable=False)
     api_key_secret = Column(Text, nullable=False)
+
 
 
 class Item(Base):
@@ -38,5 +42,4 @@ class Item(Base):
     profit_end = Column(Float, nullable=False)
     loss_end = Column(Float, nullable=False)
 
-    onwer_id = Column(Integer, ForeignKey("users.id"))
-    onwer = relationship("User", backref="item")
+    owner_email = Column(String, nullable=False) 
