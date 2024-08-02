@@ -1,7 +1,10 @@
 import ccxt
 
-apiKey = None
-secret = None
+with open("../apiKey.txt") as f:
+    lines = f.readlines()
+    apiKey = lines[0].strip()
+    secret = lines[1].strip()
+
 
 binance = ccxt.binance(config={
     "apiKey": apiKey,

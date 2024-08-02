@@ -69,9 +69,9 @@ def strategy_1(tasks, task_id: str, email, symbol = symbols, purchase_percent=pu
         diffma40_4 = df["diffMa40_4"].iloc[-1]
 
         # long position 진입 조건
-        is_long = ((sma4 > sma30) & (cur_price > long_target-5) & (diffma40_4 > con_diffma40_4) & (position["type"] == None)) 
+        is_long = ((sma4 > sma30) & (cur_price > long_target) & (diffma40_4 > con_diffma40_4) & (position["type"] == None)) 
         # short position 진입 조건
-        is_short = ((sma4 < sma30) & (cur_price < short_target+5) & (diffma40_4 > con_diffma40_4) & (position["type"] == None)) 
+        is_short = ((sma4 < sma30) & (cur_price < short_target) & (diffma40_4 > con_diffma40_4) & (position["type"] == None)) 
 
         # long position 청산 조건
         is_long_end =  (((entry_price + entry_price * profit_percent < cur_price) and position["type"] == "long") or ((entry_price - entry_price * loss_percent > cur_price) and position["type"] == "long") )
