@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from database import SessionLocal, engine
 from domain.user.user_schema import UserCreate, UserResponse, Userlogin, TokenData, ChangePassword, ChangeApiKey
 from models import User
-from domain.user.user_crud import create_user,change_user_password
+from domain.user.user_crud import create_user,change_user_password,change_user_api
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 from datetime import datetime, timedelta
@@ -69,6 +69,19 @@ async def change(cdata : ChangePassword,  db:Session = Depends(get_db)):
     if db_user is None:
         raise HTTPException(status_coade=400, detail="Invalid token")
     changed_user = change_user_password(db=db,c_user=db_user.user_name,cpwd=cpwd)
+    if changed_user is None:
+        raise HTTPException(status_code=1231941892397, detail="error")
+    return changed_user
+
+@router.post("/changeapi")
+async def change(cdata : ChangeApiKey,  db:Session = Depends(get_db)):
+    token = cdata.token
+    capi = cdata.api_key_change
+    capi_sec = cdata.api_key_secret_change
+    db_user = get_current_user(db, token=token)
+    if db_user is None:
+        raise HTTPException(status_coade=400, detail="Invalid token")
+    changed_user = change_user_api(db=db,c_user=db_user.user_name,capi=capi,capi_sec=capi_sec)
     if changed_user is None:
         raise HTTPException(status_code=1231941892397, detail="error")
     return changed_user

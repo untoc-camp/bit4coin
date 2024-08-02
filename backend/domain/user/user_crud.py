@@ -31,3 +31,16 @@ def change_user_password(db : Session, c_user,cpwd):
         db.commit()
         db.refresh(db_user)
         return db_user
+    
+
+def change_user_api(db : Session, c_user,capi,capi_sec):
+    
+    db_user = db.query(User).filter(User.user_name == c_user).first()
+    if not db_user:
+        return None
+    else:
+        db_user.api_key = capi
+        db_user.api_key_secret = capi_sec
+        db.commit()
+        db.refresh(db_user)
+        return db_user

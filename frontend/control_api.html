@@ -21,10 +21,10 @@
                     if (data.detail) {
                         alert("오류: " + data.detail);
                     } else {
-                        const username = document.getElementById('username');
-                        const password = document.getElementById('password');
-                        username.textContent = `유저네임 : ${data.user_name}`;
-                        password.textContent = `비밀번호 : ${data.password}`;
+                        const api = document.getElementById('api');
+                        const secret = document.getElementById('secret');
+                        api.textContent = `현재 api : ${data.api_key}`;
+                        secret.textContent = `현재 secret : ${data.api_key_secret}`;
 
                         console.log("사용자 정보:", data);
                     }
@@ -44,19 +44,21 @@
 
     </script>
     <script>
-        async function changepwd() {
-            const user_name_login = document.getElementById("cpassword").value;
+        async function changeapi() {
+            const capi = document.getElementById("capi").value;
+            const capi_sec = document.getElementById("capi_sec").value;
             const token = localStorage.getItem('token');
             try {
                 
-                const response = await axios.post("http://127.0.0.1:8000/user/changepwd", {
+                const response = await axios.post("http://127.0.0.1:8000/user/changeapi", {
                     token : token,
-                    user_password_change : user_name_login
+                    api_key_change : capi,
+                    api_key_secret_change : capi_sec
                 });
                 
                 // 응답이 성공적으로 왔을 때
-                console.log("비밀번호 변환성공")
-                alert("비밀번호 변경에 성공했습니다.")
+                console.log("api key 변환성공")
+                alert("api key 변환에 성공했습니다.")
                 goTo("more")
                 console.log(response.data)
             } catch (error) {
@@ -101,21 +103,24 @@
    <main style="justify-content: center; align-items: center; font-size: 23px;">
     <!-- 개인정보 띄워주기 -->
     <hr style="margin-top: 50px;">
-    <div style=" font-weight: bold;">현재 유저네임과 비밀번호</div>
+    <div style=" font-weight: bold;">현재 api key & secret</div>
     <hr>
-    <p id="username">현재 이름 :</p>
-    <p id="password">현재 비밀번호 : </p>
+    <p id="api">현재 api key :</p>
+    <p id="secret">현재 secret : </p>
     <hr>
     <!-- 개인정보 변경 버튼 -->
 
 
-     <Form style="margin-top: 60px;" id="change" onsubmit="event.preventDefault(); changepwd();">
+     <Form style="margin-top: 60px;" id="change" onsubmit="event.preventDefault(); changeapi();">
       <hr>
-      <p style="font-weight: bold; margin: 0px;">변경할 비밀번호</p>
+      <p style="font-weight: bold; margin: 0px;">변경할 api key & secret</p>
       <hr>
-      <input placeholder="변경할 비밀번호를 입력하십쇼." id="cpassword" required style="width: 80%; height: 30px;">
-      
-      <button type="submit" style=" height: 30px ; background-color: black; color: white;" class="cc">제출</button>
+      <div style="text-align: left;">
+        <input placeholder="변경할 api key를 입력하십쇼." id="capi" required style="width: 80%; height: 30px;">
+        <input placeholder="변경할 api key:secret을 입력하십쇼." id="capi_sec" required style="width: 80%; height: 30px;">
+        
+        <button type="submit" style=" height: 30px ; background-color: black; color: white;" class="cc">제출</button>
+      </div>
       <hr>
      </Form>
      <div style="width: 100%; text-align: center;"><button onclick="goTo('more')" style="text-align: center; background-color: black;color: white;font-size: 20px; border-radius: 4px;">돌아가기</button></div>
